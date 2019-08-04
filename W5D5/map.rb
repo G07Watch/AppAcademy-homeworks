@@ -10,13 +10,13 @@ class Map
 
         map.each do |subarray|
             if subarray.first == key
-                subarray.last = value
-                return "key revalued!"
+                subarray[1] = value
+                return subarray
             end
         end
 
         map << [key, value]
-        return "key value assigned!"
+        return [key,value]
     end
 
     def get(key)
@@ -27,7 +27,7 @@ class Map
             end
         end
         
-        return "no key/value found"
+        return "no value found for #{key}"
     end
 
     def delete(key)
@@ -41,10 +41,14 @@ class Map
     end
 
     def show
+        return map if map.empty?
+
         map.each do |subarray|
             print subarray
-            print '\n'
+            print "\n"
         end
+        
+        return
     end
 
     private
