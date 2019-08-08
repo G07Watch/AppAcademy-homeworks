@@ -1,3 +1,6 @@
+
+
+
 class Board
   attr_accessor :cups
 
@@ -38,30 +41,28 @@ class Board
 
   end
 
+  def which_player(name)
+
+
+
+  end
+
   def make_move(start_pos, current_player_name)
     
     hand = []
     
-    # if start_pos < 6
-    #   start_pos -= 1
-    # end
-    
-    if valid_move?(start_pos) 
-      
-        until cups[start_pos].empty?
-          stone = cups[start_pos].shift
-          hand << stone
+    until cups[start_pos].empty?
+      stone = cups[start_pos].shift
+      hand << stone
+    end
+
+    until hand.empty?
+      (start_pos+1...cups.length).each do |idx|
+        if start_pos < 5 && idx != 6
+          cup[idx] << hand.shift
+        elsif start_pos > 7 && idx != 13
         end
-
-        # until hand.empty?
-        #   (start_pos+1...cups.length).each do |idx|
-        #     if current_player_name.side == 1 && idx != 13
-        #       cup[idx] << hand.shift
-        #     elsif current_player_name.side == 2 && idx != 6
-        #     end
-        #   end
-        # end
-
+      end
     end
 
   end
