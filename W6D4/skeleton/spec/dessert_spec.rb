@@ -1,13 +1,14 @@
 require 'rspec'
 require 'dessert'
+require 'chef'
 
 =begin
 Instructions: implement all of the pending specs (the `it` statements without blocks)! Be sure to look over the solutions when you're done.
 =end
 
 describe Dessert do
-  let(:chef) { double("chef") }
-  subject(:cake) { Dessert.new("cake",10,"chef")}
+  let(:chef) {Chef.new("chef")}
+  subject(:cake) { Dessert.new("cake",10,chef)}
 
   describe "#initialize" do
     it "sets a type" do
@@ -74,10 +75,8 @@ describe Dessert do
 
   describe "#make_more" do
     it "calls bake on the dessert's chef with the dessert passed in" do 
-      type = cake.type
-      chef1 = cake.chef
-      expect(cake.make_more).to
-
+      expect(chef).to receive(:bake).with(cake)
+      cake.make_more
     end
     
   end
