@@ -27,7 +27,7 @@ class Play
       FROM
         plays
       WHERE 
-        plays.title = ?;
+        plays.title = ?
       SQL
   end
 
@@ -44,8 +44,8 @@ class Play
           FROM
             playwrights
           WHERE
-            playwrights.name = name
-        );
+            playwrights.name = ?
+        )
       SQL
   end
 
@@ -57,7 +57,9 @@ class Play
   end
 
   def create
-    raise "#{self} already in database" if self.id
+     if self.id
+      raise "#{self} already in database"
+     end
     PlayDBConnection.instance.execute(<<-SQL, self.title, self.year, self.playwright_id)
       INSERT INTO
         plays (title, year, playwright_id)
@@ -68,7 +70,9 @@ class Play
   end
 
   def update
-    raise "#{self} not in database" unless self.id
+   unless self.id
+        raise "#{self} not in database"
+   end
     PlayDBConnection.instance.execute(<<-SQL, self.title, self.year, self.playwright_id, self.id)
       UPDATE
         plays
@@ -78,18 +82,15 @@ class Play
         id = ?
     SQL
   end
+
 end
 
 class Playwright 
   attr_accessor :id, :name, :birth_year
 
   def self.all
-    PlayDBConnection.instance.execute(<<-SQL,
-      SELECT
-        *
-      FROM
-        playwrights;  
-      SQL
+   data = PlayDBConnection.instance.execute( "SELECT * FROM playwrights;")  
+   data.map { |datum| Playwright.new(datum) }
   end
 
   def self.find_by_name(name)
@@ -99,11 +100,9 @@ class Playwright
       FROM
         playwrights
       WHERE
-        playwrights.name = ?;
+        playwrights.name = ?
       SQL
   end
-
-
 
   def initialize(options)
     @id = options['id']
@@ -112,25 +111,30 @@ class Playwright
   end
 
   def create
-    raise "#{self} already in database" if self.id
+    if self.id
+        raise "#{self} already in database" 
+    end
     PlayDBConnection.instance.execute(<<-SQL, self.name, self.birth_year)
       INSERT INTO
         playwrights(name, birth_year)
       VALUES
-        (?,?);
+        (?,?)
     SQL
   end
 
+
   def update
-    raise "#{self} not in database" unless self.id
+    unless self.id
+      raise "#{self} not in database" 
+    end
     PlayDBConnection.instance.execute(<<-SQL, self.name, self.birth_year, self.id)
     UPDATE
       playwrights
     SET
       name = ?, birth_year = ?
     WHERE
-      playwrights.id = ?;
-      SQL
+      playwrights.id = ?
+    SQL
   end
 
   def get_plays(name)
@@ -147,12 +151,7 @@ class Playwright
           playwrights
         WHERE
           playwrights.name = ?
-      );
-    SQL
+      )
+  SQL
   end
-
-
-
-  
-
 end
