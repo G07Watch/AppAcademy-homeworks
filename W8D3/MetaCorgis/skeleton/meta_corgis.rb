@@ -114,13 +114,13 @@ class MetaCorgiSnacks
   def method_missing(name, *args)
     # Your code goes here...
 
-    complex = name.to_s  
-
     if @snack_box.keys.include?("#{complex}")
       puts true
       # method_name = complex[("get_".length)..-1]
 
-      @snack_box.send("get_#{method_name}_info")
+      
+      self.class.define_snack(method_name)
+      self.send(:method_name)
 
     else 
       raise "Invalid method"
@@ -130,5 +130,14 @@ class MetaCorgiSnacks
 
   def self.define_snack(name)
     # Your code goes here...
+
+    define_method(name) do 
+
+      if 
+      @snack_box.send("get_#{method_name}_info")
+
+
+
+    end
   end
 end
