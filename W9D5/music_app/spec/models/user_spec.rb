@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
 
   end
 
-  describe "associations" do
+  describe "#is_password?" do
     
   end
 
