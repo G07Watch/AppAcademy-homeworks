@@ -4,7 +4,7 @@
 // new array of every number in the array that is divisible by either 3 or 5,
 //  but not both.
 
-function fizzBuzz(array) {
+function fizzBuzz(array){
 
     function fizzer(ele){
 
@@ -27,3 +27,4 @@ function fizzBuzz(array) {
 } 
 
 fizzBuzz([1,3,5,15,25,24,30])
+
