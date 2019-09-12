@@ -4,7 +4,7 @@ function titleize (array, cb)
     let bigger = []
     
     bigger = array.map( (el) => {
-      return ["Mx.", el, "Jingleheimer", "Schmidt"]
+     return `Mx. ${el} Jingleheimer Schmidt`
     });
     
     cb(bigger);
@@ -22,4 +22,4 @@ const print = function (arr){
 
 titleize(["Mary", "Brian", "Leo"], print);
 
-print([['boop']]);
+// print('boop');
