@@ -1,0 +1,31 @@
+body{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+form {
+ margin: 20px;
+ padding: 20px;
+}
+
+.Main-header { 
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: auto;
+  margin: auto;
+  justify-content: center;
+}
+
+.Jot {
+  text-align: center;
+  font-family: comic-sans;
+  font-size: 3rem;
+  color: green;
+}
+
+
+.Today, .Note {
+  text-align: center;
+  font-size: 2rem;
+}
